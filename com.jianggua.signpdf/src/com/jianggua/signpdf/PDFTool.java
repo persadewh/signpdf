@@ -19,6 +19,12 @@ public class PDFTool {
 	
 	static final Logger logger = LogManager.getLogger(PDFTool.class);
 	
+	/**
+	 * show the size of pdf file
+	 * 
+	 * @param pdfPath
+	 * @throws IOException
+	 */
 	public static void showPDFSize(String pdfPath) throws IOException{
 		PdfReader reader = new PdfReader(pdfPath);
 		if(null != reader){

@@ -43,7 +43,7 @@ public class SignPDF {
 		// TODO Auto-generated method stub
 
 		try {
-			Parameter.checkParameters(args);
+			Parameter.checkParameters();
 			if(!Parameter.isContinue())
 				System.exit(0);
 			
