@@ -30,23 +30,26 @@ public class SignPDF {
 	static final Logger logger = LogManager.getLogger(SignPDF.class);
 	
 	/**
-	 * @param args
-	 * 
-	 * 1.Check the parameter from command
-	 * 2.Check the local environment such as font,res,and so on
-	 * 3.Read the configuration file for sign
+	 * 1.Check the command parameters
+	 * 2.Check the environment such as font,res,and so on
+	 * 3.Read the configuration file
 	 * 4.Read data file
 	 * 4.Do sign
+	 * 
+	 * @param args
+	 * 
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		try {
-			boolean isOK = Parameter.checkParameters(args);
-			if(!isOK)
+			Parameter.checkParameters(args);
+			if(!Parameter.isContinue())
 				System.exit(0);
 			
 			Environment.checkEnvironment();
+			if(!Environment.isContinue())
+				System.exit(0);
 			
 			Configuration config = Configuration.getInstance();
 			try {
@@ -57,7 +60,7 @@ public class SignPDF {
 					config.readConfigFile(Parameter.getConfig());
 				
 				if(null != config.getConfigFile()){
-					readData(Parameter.getData());
+					DataBean.readData(Parameter.getData());
 					if(SignBean.dataMap.size() > 0)
 						SignBean.packageData();
 					SignBean.doSign();
@@ -91,49 +94,6 @@ public class SignPDF {
 		}
 		finally{
 			System.exit(0);
-		}
-	}
-	
-	public static void readData(String dataFilePath) throws FileNotFoundException, DocumentException, UnsupportedEncodingException{
-		logger.info("Read data");
-		if(!FileUtil.isFile(dataFilePath))
-			logger.info("Have no data file");
-		else{
-			StringBuilder sb = new StringBuilder();
-			String line = "";
-			BufferedReader br  = new BufferedReader(new InputStreamReader(new FileInputStream(dataFilePath), "UTF-8"));
-			try {
-				while((line = br.readLine()) != null)
-				{
-					sb.append(line);
-					logger.info(line);
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			StringReader stringReader = new StringReader(sb.toString());
-			SAXReader saxReader = new SAXReader();
-			Document document = saxReader.read(stringReader);
-			if(null != document)
-			{
-				Element rootElement = document.getRootElement();
-				if(null != rootElement)
-				{
-					logger.info(rootElement.getName());
-					List datas = rootElement.elements("data");
-					if(null != datas && datas.size() > 0){
-						for(int i = 0 ; i < datas.size() ; i++){
-							Element data = (Element)datas.get(i);
-							logger.info("name : " + data.attributeValue("name") + "\t value : " + data.attributeValue("value"));
-							SignBean.dataMap.put(data.attributeValue("name"), data.attributeValue("value"));
-						}
-					}
-				}
-			}
-			stringReader.close();
-			
 		}
 	}
 

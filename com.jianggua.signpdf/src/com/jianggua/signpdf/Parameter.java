@@ -22,6 +22,10 @@ public class Parameter {
 	private static String data = null;
 	private static boolean help = false;
 	
+	private static boolean isContinue = true;
+	
+	
+
 	private Parameter(){}
 	
 	/**
@@ -35,14 +39,14 @@ public class Parameter {
 	 * @throws IOException 
 	 * @return isOK - if isOK is false,the program will stop
 	 */
-	public static boolean checkParameters(String[] args) throws ParameterException, IOException{
-		boolean isOK = true;
+	public static void checkParameters(String[] args) throws ParameterException, IOException{
+		
 		
 		logger.info("Checking parameters...");
 		
 		if(null == args || args.length == 0)
 		{
-			isOK = false;
+			isContinue = false;
 			throw new ParameterException("Parameter Error");
 		}
 		else{
@@ -62,13 +66,12 @@ public class Parameter {
 			if(help)
 			{
 				logger.info("Show help");
-				isOK = false;
+				isContinue = false;
 				showHelp();
-				return isOK;
 			}
 			
 			if(!FileUtil.isFile(source)){
-				isOK = false;
+				isContinue = false;
 				throw new ParameterException("The Parameter " + Constants.SOURCE + " is error");
 			}
 			else{
@@ -76,26 +79,24 @@ public class Parameter {
 			}
 			
 			if(null == target || !target.toLowerCase().endsWith(".pdf")){
-				isOK = false;
+				isContinue = false;
 				throw new ParameterException("The Parameter " + Constants.TARGET + " is error");
 			}
 			
 			if(null != config){
 				if(!FileUtil.isFile(config)){
-					isOK = false;
+					isContinue = false;
 					throw new ParameterException("The Parameter " + Constants.CONFIGURATION + " is error");
 				}
 			}
 			
 			if(null != data){
 				if(!FileUtil.isFile(data)){
-					isOK = false;
+					isContinue = false;
 					throw new ParameterException("The Parameter " + Constants.DATA + " is error");
 				}
 			}
 		}
-		
-		return isOK;
 	}
 	
 	
@@ -105,8 +106,8 @@ public class Parameter {
 		System.out.println("\t" + Constants.HELP + " Show help info to user");
 		System.out.println("\t" + Constants.SOURCE + " The path of source pdf file for sign");
 		System.out.println("\t" + Constants.TARGET + " The path of target pdf file with signed info");
-		System.out.println("\t" + Constants.CONFIGURATION + " The path of customized config file(option)");
-		System.out.println("\t" + Constants.DATA + " The path of signed info file(option)");
+		System.out.println("\t" + Constants.CONFIGURATION + " The path of customized config file(option),use the default configuration in .jar file");
+		System.out.println("\t" + Constants.DATA + " The path of signed info file(option),if no data file,sign with configuration file");
 		System.out.println("***********************************************************");
 	}
 	
@@ -162,5 +163,9 @@ public class Parameter {
 
 	public static void setData(String data) {
 		Parameter.data = data;
+	}
+	
+	public static boolean isContinue() {
+		return isContinue;
 	}
 }

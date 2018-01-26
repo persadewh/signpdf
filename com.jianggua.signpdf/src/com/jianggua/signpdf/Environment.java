@@ -1,5 +1,8 @@
 package com.jianggua.signpdf;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jianggua.exception.EnvironmentException;
 
 /**
@@ -8,6 +11,10 @@ import com.jianggua.exception.EnvironmentException;
  */
 public class Environment {
 
+	static Logger logger = LogManager.getLogger(Environment.class);
+	
+	private static boolean isContinue = true;
+	
 	private Environment(){}
 	
 	public static void checkEnvironment() throws EnvironmentException{
@@ -17,5 +24,11 @@ public class Environment {
 	public static final String userDir = System.getProperty("user.dir");
 	
 	public static final String tempDir = System.getProperty("java.io.tmpdir");
+
+	public static boolean isContinue() {
+		return isContinue;
+	}
+	
+	
 	
 }
