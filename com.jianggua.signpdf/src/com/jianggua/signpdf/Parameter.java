@@ -28,7 +28,7 @@ public class Parameter {
 	private static String target = null;
 	private static String config = null;
 	private static String data = null;
-	private static boolean help = false;
+
 	
 	private static boolean isContinue = true;
 	
@@ -60,25 +60,23 @@ public class Parameter {
 		
 		Option sourceOpt = Option.builder(Constants.SOURCE)
 				.longOpt(Constants.LONGSOURCE)
-				.argName("file")
+				.argName(Constants.FILE)
 				.desc(Constants.SOURCEDESC)
-				.required()
 				.hasArg()
 				.numberOfArgs(1)
 				.build();
 		
 		Option targetOpt = Option.builder(Constants.TARGET)
 				.longOpt(Constants.LONGTARGET)
-				.argName("file")
+				.argName(Constants.FILE)
 				.desc(Constants.TARGETDESC)
-				.required()
 				.hasArg()
 				.numberOfArgs(1)
 				.build();
 		
 		Option configOpt = Option.builder(Constants.CONFIG)
 				.longOpt(Constants.lONGCONFIG)
-				.argName("file")
+				.argName(Constants.FILE)
 				.desc(Constants.CONFIGDESC)
 				.hasArg()
 				.numberOfArgs(1)
@@ -86,7 +84,7 @@ public class Parameter {
 		
 		Option dataOpt = Option.builder(Constants.DATA)
 				.longOpt(Constants.LONGDATA)
-				.argName("file")
+				.argName(Constants.FILE)
 				.desc(Constants.DATADESC)
 				.hasArg()
 				.numberOfArgs(1)
@@ -118,62 +116,42 @@ public class Parameter {
 		if(cmd.hasOption(Constants.HELP)){
 			HelpFormatter formatter = new HelpFormatter();
 			formatter.printHelp("signpdf", options, true);
+			isContinue = false;
+			return;
 		}
 		
+		source = cmd.getOptionValue(Constants.SOURCE);
+		target = cmd.getOptionValue(Constants.TARGET);
+		config = cmd.getOptionValue(Constants.CONFIG);
+		data = cmd.getOptionValue(Constants.DATA);
 		
-//		if(null == args || args.length == 0)
-//		{
-//			isContinue = false;
-//			throw new ParameterException("Parameter Error");
-//		}
-//		else{
-//			for(String arg : args){
-//				if(arg.toLowerCase().startsWith(Constants.SOURCE))
-//					source = getParam(arg);
-//				else if(arg.toLowerCase().startsWith(Constants.TARGET))
-//					target = getParam(arg);
-//				else if(arg.toLowerCase().startsWith(Constants.CONFIG))
-//					config = getParam(arg);
-//				else if(arg.toLowerCase().startsWith(Constants.DATA))
-//					data = getParam(arg);
-//				else if(arg.toLowerCase().startsWith(Constants.HELP))
-//					help = true;
-//			}
-//			
-//			if(help)
-//			{
-//				logger.info("Show help");
-//				isContinue = false;
-//				showHelp();
-//			}
-//			
-//			if(!FileUtil.isFile(source)){
-//				isContinue = false;
-//				throw new ParameterException("The Parameter " + Constants.SOURCE + " is error");
-//			}
-//			else{
-//				PDFTool.showPDFSize(source);
-//			}
-//			
-//			if(null == target || !target.toLowerCase().endsWith(".pdf")){
-//				isContinue = false;
-//				throw new ParameterException("The Parameter " + Constants.TARGET + " is error");
-//			}
-//			
-//			if(null != config){
-//				if(!FileUtil.isFile(config)){
-//					isContinue = false;
-//					throw new ParameterException("The Parameter " + Constants.CONFIG + " is error");
-//				}
-//			}
-//			
-//			if(null != data){
-//				if(!FileUtil.isFile(data)){
-//					isContinue = false;
-//					throw new ParameterException("The Parameter " + Constants.DATA + " is error");
-//				}
-//			}
-//		}
+		
+		if(!FileUtil.isFile(source) || !source.toLowerCase().endsWith(".pdf")){
+			isContinue = false;
+			throw new ParameterException("The Parameter " + Constants.SOURCE + " is error");
+		}
+		else{
+			PDFTool.showPDFSize(source);
+		}
+		
+		if(null == target || !target.toLowerCase().endsWith(".pdf")){
+			isContinue = false;
+			throw new ParameterException("The Parameter " + Constants.TARGET + " is error");
+		}
+		
+		if(null != config && !config.equals("")){
+			if(!FileUtil.isFile(config)){
+				isContinue = false;
+				throw new ParameterException("The Parameter " + Constants.CONFIG + " is error");
+			}
+		}
+		
+		if(null != data && !data.equals("")){
+			if(!FileUtil.isFile(data)){
+				isContinue = false;
+				throw new ParameterException("The Parameter " + Constants.DATA + " is error");
+			}
+		}
 		
 		logger.info("Check parameters End");
 	}

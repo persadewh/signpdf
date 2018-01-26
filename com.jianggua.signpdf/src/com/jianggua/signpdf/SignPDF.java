@@ -10,6 +10,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
@@ -30,12 +31,11 @@ public class SignPDF {
 	static final Logger logger = LogManager.getLogger(SignPDF.class);
 	
 	/**
-	 * 1.Check the command parameters
+	 * 1.Init and check the command parameters
 	 * 2.Check the environment such as font,res,and so on
 	 * 3.Read the configuration file
 	 * 4.Read data file
 	 * 4.Do sign
-	 * 
 	 * @param args
 	 * 
 	 */
@@ -43,11 +43,12 @@ public class SignPDF {
 		// TODO Auto-generated method stub
 
 		try {
+			Parameter.initParameters(args);
 			Parameter.checkParameters();
 			if(!Parameter.isContinue())
 				System.exit(0);
 			
-			Environment.checkEnvironment();
+			Environment.checkEnvironments();
 			if(!Environment.isContinue())
 				System.exit(0);
 			
@@ -91,6 +92,9 @@ public class SignPDF {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			logger.error(e1.getMessage());
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		finally{
 			System.exit(0);

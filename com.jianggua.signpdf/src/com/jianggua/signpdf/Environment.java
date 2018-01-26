@@ -17,7 +17,7 @@ public class Environment {
 	
 	private Environment(){}
 	
-	public static void checkEnvironment() throws EnvironmentException{
+	public static void checkEnvironments() throws EnvironmentException{
 		
 	}
 	

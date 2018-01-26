@@ -2,8 +2,8 @@
 <Configuration status="WARN">
 
 	<Properties>
-		<!-- <property name="LOG_HOME">${env:TEMP}</property> -->
-		<property name="LOG_HOME">/tmp</property>
+		<property name="LOG_HOME">${env:TEMP}</property>
+		<!-- <property name="LOG_HOME">/tmp</property> -->
 		<property name="FILE_NAME">signpdf.log</property>
 	</Properties>
 

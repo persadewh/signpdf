@@ -28,4 +28,6 @@ public final class Constants {
 	public static final String lONGCONFIG = "config";
 	public static final String CONFIGDESC = "This is a config file path for sign";
 	
+	public static final String FILE = "file";
+	
 }
