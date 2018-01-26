@@ -1,0 +1,19 @@
+<config>
+	<!-- 
+		1.when use font with file path,such as font="E:/simhei.ttf",then must use encoding like encoding="Identity-H"
+		
+	 -->
+	<page width="3370.39" height="2383.94" font="simhei.ttf" fontsize="20" encoding="Identity-H">
+		<text name="A" x="10" y="10"/>
+		<text name="B" x="20" y="20"/>
+		<text name="C" x="30" y="30"/>
+		<text name="D" x="40" y="40"/>
+		<text name="E" x="50" y="50"/>
+		<text name="F" x="60" y="60"/>
+		<text name="G" x="70" y="70"/>
+		<text name="H" x="80" y="80"/>
+		<text name="I" x="90" y="90"/>
+		<signet src="A.jpg" x="100" y="100"/>
+		<signet src="B.jpg" x="150" y="150"/>
+	</page>
+</config>

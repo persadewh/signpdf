@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+	<Properties>
+		<property name="LOG_HOME">${env:TEMP}</property>
+		<property name="FILE_NAME">signpdf.log</property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</Console>
+		
+		<!--  <File name="File" fileName="${env:TEMP}/${FILE_NAME}" append="false">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</File> -->
+		
+		<RollingFile name="RollingFile" fileName="${LOG_HOME}/${FILE_NAME}" append="true" filePattern="${env:TEMP}/%d{yyyyMMddHHmmss} - ${FILE_NAME}.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"/>
+				<SizeBasedTriggeringPolicy size="1MB"/>
+			</Policies>
+		</RollingFile>
+		
+	</Appenders>
+	<Loggers>
+		<Root level="debug">
+			<AppenderRef ref="Console"/>
+			<AppenderRef ref="RollingFile"/>
+		</Root>
+	</Loggers>
+</Configuration>
