@@ -1,6 +1,6 @@
 <config>
 	<!-- 
-		1.when use font with file path,such as font="E:/simhei.ttf",then must use encoding like encoding="Identity-H"
+		when use font with file path,such as font="E:/simhei.ttf or /home/simhei.ttf",then must use encoding like encoding="Identity-H"
 		
 	 -->
 	<page width="3370.39" height="2383.94" font="simhei.ttf" fontsize="20" encoding="Identity-H">
