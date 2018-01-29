@@ -53,35 +53,21 @@ public class SignPDF {
 				System.exit(0);
 			
 			Configuration config = Configuration.getInstance();
-			try {
-				if(null == Parameter.getConfig()){
-					logger.info("Read default configuration");
-					config.readConfigFile();
-				}
-				else{
-					logger.info("Read custom configuration");
-					config.readConfigFile(Parameter.getConfig());
-				}
-				
-				if(null != config.getConfigFile()){
-					DataBean.readData(Parameter.getData());
-					if(SignBean.dataMap.size() > 0)
-						SignBean.packageData();
-					SignBean.doSign();
-				}
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				logger.error(e.getMessage());
-			} catch (DocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				logger.error(e.getMessage());
-			} catch (com.lowagie.text.DocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				logger.error(e.getMessage());
+			
+			if(null == Parameter.getConfig()){
+				logger.info("Read default configuration");
+				config.readConfigFile();
+			}
+			else{
+				logger.info("Read custom configuration");
+				config.readConfigFile(Parameter.getConfig());
+			}
+			
+			if(null != config.getConfigFile()){
+				DataBean.readData(Parameter.getData());
+				if(SignBean.dataMap.size() > 0)
+					SignBean.packageData();
+				SignBean.doSign();
 			}
 		} catch (ParameterException e1) {
 			// TODO Auto-generated catch block
@@ -98,6 +84,15 @@ public class SignPDF {
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			logger.error(e1.getMessage());
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		} catch (com.lowagie.text.DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		finally{
 			System.exit(0);
