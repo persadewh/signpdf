@@ -1,7 +1,7 @@
 <config>
 	<!-- 
-		when use font with file path,such as font="E:/simhei.ttf or /home/simhei.ttf",then must use encoding like encoding="Identity-H"
-		
+		1.when use font with file path,such as font="E:/simhei.ttf or /home/simhei.ttf",then must use encoding like encoding="Identity-H",it is recommended to use default value.
+		2.In signet tag,the width and height are optional
 	 -->
 	<page width="3370.39" height="2383.94" font="simhei.ttf" fontsize="20" encoding="Identity-H">
 		<text name="A" x="10" y="10"/>
@@ -13,7 +13,7 @@
 		<text name="G" x="70" y="70"/>
 		<text name="H" x="80" y="80"/>
 		<text name="I" x="90" y="90"/>
-		<signet src="A.jpg" x="100" y="100"/>
-		<signet src="B.jpg" x="150" y="150"/>
+		<signet src="A.jpg" x="100" y="100" width="100" height="100"/>
+		<signet src="B.jpg" x="150" y="150"  width="200" height="200"/>
 	</page>
 </config>

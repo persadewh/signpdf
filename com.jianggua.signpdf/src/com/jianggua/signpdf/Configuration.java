@@ -136,6 +136,8 @@ public class Configuration {
 										signetBean.setSrc(signet.attributeValue("src"));
 										signetBean.setX(signet.attributeValue("x"));
 										signetBean.setY(signet.attributeValue("y"));
+										signetBean.setWidth(signet.attributeValue("width"));
+										signetBean.setHeight(signet.attributeValue("height"));
 										onePage.getSignetBeanList().add(signetBean);
 									}
 								}

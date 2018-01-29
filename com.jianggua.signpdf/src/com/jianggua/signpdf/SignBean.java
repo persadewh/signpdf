@@ -81,6 +81,10 @@ public class SignBean {
 					SignetBean signetBean = pageBean.getSignetBeanList().get(j);
 					Image image = Image.getInstance(SignBean.class.getClass().getResource("/res/" + signetBean.getSrc()));
 					image.setAbsolutePosition(Float.valueOf(signetBean.getX()), Float.valueOf(signetBean.getY()));
+					if(null != signetBean.getWidth() && !signetBean.getWidth().equals(""))
+						image.scaleAbsoluteWidth(Float.valueOf(signetBean.getWidth()));
+					if(null != signetBean.getHeight() && !signetBean.getHeight().equals(""))
+						image.scaleAbsoluteHeight(Float.valueOf(signetBean.getHeight()));
 					image.setAlignment(Image.ALIGN_CENTER);
 					
 					content.addImage(image);

@@ -9,6 +9,9 @@ public class SignetBean {
 	private String x = null;
 	private String y = null;
 	
+	private String width = null;
+	private String height = null;
+	
 	public String getSrc() {
 		return src;
 	}
@@ -26,5 +29,18 @@ public class SignetBean {
 	}
 	public void setY(String y) {
 		this.y = y;
+	}
+	public String getWidth() {
+		return width;
+	}
+	public void setWidth(String width) {
+		this.width = width;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
 	}	
+	
 }

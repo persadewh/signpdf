@@ -7,7 +7,6 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
@@ -128,7 +127,8 @@ public class Parameter {
 		
 		if(!FileUtil.isFile(source) || !source.toLowerCase().endsWith(".pdf")){
 			isContinue = false;
-			throw new ParameterException("The Parameter " + Constants.SOURCE + " is error");
+			logger.info("The Parameter " + Constants.SOURCE + " is wrong");
+			throw new ParameterException("The Parameter " + Constants.SOURCE + " is wrong");
 		}
 		else{
 			PDFTool.showPDFSize(source);
@@ -136,20 +136,23 @@ public class Parameter {
 		
 		if(null == target || !target.toLowerCase().endsWith(".pdf")){
 			isContinue = false;
-			throw new ParameterException("The Parameter " + Constants.TARGET + " is error");
+			logger.info("The Parameter " + Constants.TARGET + " is wrong");
+			throw new ParameterException("The Parameter " + Constants.TARGET + " is wrong");
 		}
 		
 		if(null != config && !config.equals("")){
 			if(!FileUtil.isFile(config)){
 				isContinue = false;
-				throw new ParameterException("The Parameter " + Constants.CONFIG + " is error");
+				logger.info("The Parameter " + Constants.CONFIG + " is wrong");
+				throw new ParameterException("The Parameter " + Constants.CONFIG + " is wrong");
 			}
 		}
 		
 		if(null != data && !data.equals("")){
 			if(!FileUtil.isFile(data)){
 				isContinue = false;
-				throw new ParameterException("The Parameter " + Constants.DATA + " is error");
+				logger.info("The Parameter " + Constants.DATA + " is wrong");
+				throw new ParameterException("The Parameter " + Constants.DATA + " is wrong");
 			}
 		}
 		

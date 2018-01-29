@@ -55,10 +55,13 @@ public class SignPDF {
 			Configuration config = Configuration.getInstance();
 			try {
 				if(null == Parameter.getConfig()){
+					logger.info("Read default configuration");
 					config.readConfigFile();
 				}
-				else
+				else{
+					logger.info("Read custom configuration");
 					config.readConfigFile(Parameter.getConfig());
+				}
 				
 				if(null != config.getConfigFile()){
 					DataBean.readData(Parameter.getData());
