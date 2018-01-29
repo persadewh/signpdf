@@ -27,8 +27,10 @@
 	</Appenders>
 	<Loggers>
 		<Root level="debug">
-			<AppenderRef ref="Console"/>
 			<AppenderRef ref="RollingFile"/>
 		</Root>
+		<Logger name="com.jianggua" level="error">
+			<AppenderRef ref="Console"/>
+		</Logger>
 	</Loggers>
 </Configuration>
