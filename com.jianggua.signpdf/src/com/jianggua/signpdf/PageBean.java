@@ -15,6 +15,8 @@ public class PageBean {
 	private String fontSize = "10";
 	private String encoding = null;
 	
+	private String deviation = "5";
+	
 	private List<TextBean> textBeanList = new ArrayList();
 	
 	private List<SignetBean> signetBeanList = new ArrayList();
@@ -73,6 +75,14 @@ public class PageBean {
 
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
+	}
+	
+	public String getDeviation() {
+		return deviation;
+	}
+
+	public void setDeviation(String deviation) {
+		this.deviation = deviation;
 	}
 	
 }

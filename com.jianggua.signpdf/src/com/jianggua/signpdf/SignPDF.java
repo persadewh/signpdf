@@ -1,6 +1,7 @@
 package com.jianggua.signpdf;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -73,30 +74,48 @@ public class SignPDF {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			logger.error(e1.getMessage());
+			deleteFile(Parameter.getTarget());
 		} catch (EnvironmentException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			logger.error(e1.getMessage());
+			deleteFile(Parameter.getTarget());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			logger.error(e1.getMessage());
+			deleteFile(Parameter.getTarget());
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			logger.error(e1.getMessage());
+			deleteFile(Parameter.getTarget());
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.error(e.getMessage());
+			deleteFile(Parameter.getTarget());
 		} catch (com.lowagie.text.DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.error(e.getMessage());
+			deleteFile(Parameter.getTarget());
 		}
 		finally{
 			System.exit(0);
 		}
 	}
 
+	private static void deleteFile(String path){
+		File file = new File(path);
+		if(file.exists()){
+			logger.info("Removing " + path);
+			if(file.getAbsoluteFile().delete()){
+				logger.info("Remove success");
+			}else{
+				logger.info("Remove failure ");
+			}
+		}
+	}
+	
 }

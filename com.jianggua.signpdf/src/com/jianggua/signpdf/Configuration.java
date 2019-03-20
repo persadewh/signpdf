@@ -115,6 +115,14 @@ public class Configuration {
 								onePage.setFontSize(page.attributeValue("fontsize"));
 								onePage.setEncoding(page.attributeValue("encoding"));
 								
+								if(null != page.attributeValue("deviation")){
+									if(page.attributeValue("deviation").equals("")){
+										//pass;
+									}else{
+										onePage.setDeviation(page.attributeValue("deviation"));
+									}	
+								}
+								
 								List texts = page.elements("text");
 								if(null != texts && texts.size() > 0)
 								{
